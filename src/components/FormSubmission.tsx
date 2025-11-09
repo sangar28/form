@@ -1,56 +1,48 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 
 type FormData = {
-  firstName: string;
-  lastName: string;
+  userName: string;
   email: string;
-  city: string;
-  state: string;
-  country: string;
-  zip: number;
+  password: string;
 };
 
 const FormSubmission = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<FormData>();
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     console.log(data);
   };
   return (
     <div className="container">
       <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
+        <h1 style={{textAlign: "center"}}>Sign Up</h1>
         <div className="input-container">
-          <label htmlFor="firstName" className="label">
-            FirstName
+          <label htmlFor="userName" className="label">
+            UserName
           </label>
           <input
-            className="input-field"
+            className="input-field "
             type="text"
-            id="firstName"
-            {...register("firstName", { required: "FirstName is required." })}
+            id="userName"
+            {...register("userName", {
+              required: "UserName is required.",
+              pattern: {
+                value: /^[a-zA-Z0-9_-]{4,20}$/,
+                message: "Invalid UserName",
+              },
+            })}
+            style={{ borderColor: errors.userName ? "orange" : "#fff" }}
           />
-          {errors.firstName && (
-            <p className="error">{errors.firstName.message}</p>
+          {errors.userName && (
+            <p className="error">{errors.userName.message}</p>
           )}
         </div>
-        <div className="input-container">
-          <label htmlFor="lastName" className="label">
-            LastName
-          </label>
-          <input
-            className="input-field"
-            type="text"
-            id="lastName"
-            {...register("lastName", { required: "lastName is required." })}
-          />
-          {errors.lastName && (
-            <p className="error">{errors.lastName.message}</p>
-          )}
-        </div>
+
         <div className="input-container">
           <label htmlFor="email" className="label">
             Email
@@ -66,61 +58,32 @@ const FormSubmission = () => {
                 message: "Invalid Email",
               },
             })}
+            style={{ borderColor: errors.userName ? "orange" : "#fff" }}
           />
           {errors.email && <p className="error">{errors.email.message}</p>}
         </div>
         <div className="input-container">
-          <label htmlFor="city" className="label">
-            city
+          <label htmlFor="password" className="label">
+            Password
           </label>
           <input
             className="input-field"
-            type="city"
-            id="city"
-            {...register("city", { required: "city is required." })}
-          />
-          {errors.city && <p className="error">{errors.city.message}</p>}
-        </div>
-        <div className="input-container">
-          <label htmlFor="state" className="label">
-            State
-          </label>
-          <input
-            className="input-field"
-            type="state"
-            id="state"
-            {...register("state", { required: "state is required." })}
-          />
-          {errors.state && <p className="error">{errors.state.message}</p>}
-        </div>
-        <div className="input-container">
-          <label htmlFor="country" className="label">
-            Country
-          </label>
-          <input
-            className="input-field"
-            type="country"
-            id="country"
-            {...register("country", { required: "country is required." })}
-          />
-          {errors.country && <p className="error">{errors.country.message}</p>}
-        </div>
-        <div className="input-container">
-          <label htmlFor="zip" className="label">
-            Zip
-          </label>
-          <input
-            className="input-field"
-            type="zip"
-            id="zip"
-            {...register("zip", {
-              required: "zip is required.",
+            type="password"
+            id="password"
+            {...register("password", {
+              required: "password is required.",
+              minLength: {
+                value: 8, message: "password must contain 8 characters"
+              },
             })}
+            style={{ borderColor: errors.userName ? "orange" : "#fff" }}
           />
-          {errors.zip && <p className="error ">{errors.zip.message}</p>}
+          {errors.password && (
+            <p className="error">{errors.password.message}</p>
+          )}
         </div>
         <button type="submit" className="btn">
-          Submit
+          {isSubmitting ? "Signing Up..." : "Sign Up"}
         </button>
       </form>
     </div>

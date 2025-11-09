@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
 }
 
 body {
@@ -12,11 +13,17 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: url("../public/bg1.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+  
 }
 
 .container {
-  background: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
   min-width: 600px;
   margin: 0 auto;
   display: flex;
@@ -27,7 +34,7 @@ body {
 }
 
 .error {
-  color: red;
+  color: orange;
   font-weight: 400;
 }
 
@@ -35,6 +42,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
+  
 }
 
 .input-container {
@@ -44,26 +52,32 @@ body {
   min-width: 400px;
 }
 
-.input-field{
+.input-field {
   margin: 4px 0;
-  padding: 6px 4px;
-}
-
-.label{
-  font-weight: 500;
-}
-
-.btn{
-  padding: 8px 4px;
-  font-size: large;
-  font-weight: 500;
-  background: #2f2f2f;
+  padding: 10px 4px;
+  outline: none;
+  border: 1px solid #fff;
+  background: inherit;
   color: #fff;
+  font-size: 1rem;
+}
+
+.label {
+  font-weight: 500;
+}
+
+.btn {
+  padding: 12px 4px;
+  font-size: large;
+  font-weight: 700;
+  background: #fff;
+  color: #2f2f2f;
   border: none;
   outline: none;
   border-radius: 30px;
+  margin-top: 20px;
 }
 
-.passError{
+.passError {
   max-width: 300px;
 }
